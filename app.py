@@ -17,6 +17,7 @@ def home():
     json_path = os.path.join(BASE_DIR, 'rules', 'dq_rules.json')
     report, score,dirty_df = run_quality_engine("company_data.db", json_path)
     report_html = report.to_html(classes="table table-bordered table-striped table-hover", index=False)
+    
     dirty_dff=dirty_df.to_html(classes="table table-bordered table-striped table-hover", index=False)
     return render_template('index.html', table_data=report_html,table_dirty=dirty_dff, score=round(score, 2), nguoi_cham_diem="Nghĩa")
             

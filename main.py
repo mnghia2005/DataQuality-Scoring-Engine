@@ -1,13 +1,11 @@
 import pandas as pd
 import json
 import sqlite3
-
+from connect import connect_to_sql_server
 
 def run_quality_engine(db_path,rules_path):
-    conn=sqlite3.connect(db_path)
-    query="select * from customers"
-    df=pd.read_sql(query,conn)
-    conn.close()
+    
+    df=connect_to_sql_server()
     with open(rules_path,"r",encoding="utf-8") as f:
         config=json.load(f)
 
@@ -64,11 +62,14 @@ def run_quality_engine(db_path,rules_path):
                 "Dòng Đạt": f"{passed}/{total_rows}",
                 "Điểm Số (%)": round(rule_score, 2)
             })
-        
-    dirty_df = df[df['Error_Details'] != ""].copy()
+    df1=df[['Customer_ID','Error_Details']]
+    dirty_df = df1[df['Error_Details'] != ""].copy()
     dirty_df=pd.DataFrame(dirty_df)
     report_df = pd.DataFrame(report_list)
     final_score = total_weighted_score / total_weight
-    
+    dirty_df = dirty_df.rename(columns={
+    'Customer_ID': 'Mã khách hàng',
+    'Error_Details': 'Chi tiết lỗi vi phạm'
+})
     return report_df, final_score,dirty_df
 
