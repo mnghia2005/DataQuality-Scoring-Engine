@@ -1,0 +1,1 @@
+sql_query = "UPDATE customers SET Full_Name = "" WHERE Customer_ID="CUST-0000""

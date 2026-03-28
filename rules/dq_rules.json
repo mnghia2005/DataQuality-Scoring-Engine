@@ -1,0 +1,68 @@
+{
+ 
+   "rules": [
+    {
+      "rule_id": "COMP-01",
+      "column": "Full_Name",
+      "type": "not_null",
+      "desc": "Tính đầy đủ: Tên khách hàng không được để trống",
+      "weight": 0.8
+    },
+    
+    {
+"rule_id": "COMP-02",
+      "column": "Email",
+      "type": "not_null",
+      "desc": "Tính đầy đủ: Email không được để trống",
+      "weight": 0.8
+
+
+    },
+  
+      {
+"rule_id": "ACC-01",
+      "column": "Age",
+      "type": "range",
+      "min":1,
+      "max":120,
+      "desc": "Tính chính xác: Độ tuổi phải từ 1-120",
+      "weight": 1.1
+
+
+    } ,
+
+       {
+"rule_id": "ACC-02",
+      "column": "Total_Spent",
+      "type": "range",
+      "min":0,
+      "max":9999999999,
+      "desc": "Tính chính xác: Tổng chi tiêu không được <0",
+      "weight": 1.1
+
+
+    },
+
+ {
+"rule_id": "CON-01",
+      "column": "Email",
+      "type": "regex",
+      "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w+$",
+      "desc": "Tính nhất quán: Email có dạng xxx@xxxx.xxx",
+      "weight": 1
+
+
+    },
+
+ {
+"rule_id": "CON-02",
+      "column": "Phone",
+      "type": "regex",
+      "pattern": "^0\\d{9}$",
+      "desc": "Tính nhấtquasn: Số điện thoại phải có 10 chữ số, bắt đầu bằng số 0",
+      "weight": 1
+
+
+    }
+  ]
+}
