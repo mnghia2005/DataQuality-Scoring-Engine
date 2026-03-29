@@ -15,7 +15,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 def home(): 
 
     json_path = os.path.join(BASE_DIR, 'rules', 'dq_rules.json')
-    report, score,dirty_df = run_quality_engine("company_data.db", json_path)
+    report, score,dirty_df = run_quality_engine(json_path)
     report_html = report.to_html(classes="table table-bordered table-striped table-hover", index=False)
     
     dirty_dff=dirty_df.to_html(classes="table table-bordered table-striped table-hover", index=False)

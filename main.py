@@ -3,9 +3,9 @@ import json
 import sqlite3
 from connect import connect_to_sql_server
 
-def run_quality_engine(db_path,rules_path):
+def run_quality_engine(rules_path,server, database, driver):
     
-    df=connect_to_sql_server()
+    df=connect_to_sql_server(server, database, driver)
     with open(rules_path,"r",encoding="utf-8") as f:
         config=json.load(f)
 
